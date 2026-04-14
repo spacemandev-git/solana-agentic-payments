@@ -8,7 +8,8 @@
     "setup": "bun run scripts/setup-wallet.ts",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "agent:demo": "bun run agent-example/buy-event-ticket.ts"
+    "agent:demo": "bun run agent-example/buy-event-ticket.ts",
+    "e2e": "bash scripts/e2e.sh"
   },
   "dependencies": {
     "@solana/kit": "^5.1.0",
