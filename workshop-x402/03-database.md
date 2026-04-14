@@ -8,13 +8,13 @@ docker compose up -d
 
 That's it — `docker-compose.yml` defines a single Postgres 16 container on host port **5433** (we use 5433, not the standard 5432, to avoid clashing with any other Postgres you might have running).
 
-Peek at [`solution/docker-compose.yml`](../solution/docker-compose.yml) if you want to see what's running.
+Peek at [`solution-x402/docker-compose.yml`](../solution-x402/docker-compose.yml) if you want to see what's running.
 
 ## Schema
 
 Three tables: events, tickets, listings.
 
-See [`solution/src/db/schema.ts`](../solution/src/db/schema.ts):
+See [`solution-x402/src/db/schema.ts`](../solution-x402/src/db/schema.ts):
 
 ```ts
 export const events = pgTable("events", {

@@ -1,6 +1,6 @@
 # 06 — Events API
 
-The meat of the workshop. See [`solution/src/routes/events.ts`](../solution/src/routes/events.ts).
+The meat of the workshop. See [`solution-x402/src/routes/events.ts`](../solution-x402/src/routes/events.ts).
 
 ## Free reads
 

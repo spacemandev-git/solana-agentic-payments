@@ -9,7 +9,7 @@ In production you'd point at the public `https://facilitator.x402.org`. For loca
 
 ## Generate both wallets
 
-[`solution/scripts/setup-wallet.ts`](../solution/scripts/setup-wallet.ts) generates two fresh ed25519 keypairs and also funds them on surfpool (so you can watch the cheatcodes in action). Run it once:
+[`solution-x402/scripts/setup-wallet.ts`](../solution-x402/scripts/setup-wallet.ts) generates two fresh ed25519 keypairs and also funds them on surfpool (so you can watch the cheatcodes in action). Run it once:
 
 ```bash
 bun run setup
@@ -17,11 +17,11 @@ bun run setup
 
 Copy the four `*_SECRET` / `*_ADDRESS` lines it prints into your `.env`.
 
-> **Why the addresses matter across restarts:** surfpool wipes state on restart. The server self-funds both wallets every time `bun dev` starts (see [`src/fund.ts`](../solution/src/fund.ts) and [`src/index.ts`](../solution/src/index.ts)) — so the addresses stay constant but the balances get refreshed automatically.
+> **Why the addresses matter across restarts:** surfpool wipes state on restart. The server self-funds both wallets every time `bun dev` starts (see [`src/fund.ts`](../solution-x402/src/fund.ts) and [`src/index.ts`](../solution-x402/src/index.ts)) — so the addresses stay constant but the balances get refreshed automatically.
 
 ## Generating keypairs safely
 
-[`solution/src/wallet.ts`](../solution/src/wallet.ts):
+[`solution-x402/src/wallet.ts`](../solution-x402/src/wallet.ts):
 
 ```ts
 import { createKeyPairSignerFromPrivateKeyBytes } from "@solana/kit";
@@ -42,7 +42,7 @@ A Solana private key is just 32 random bytes. We pass `extractable: true` so the
 
 ## The facilitator
 
-[`solution/src/x402-facilitator.ts`](../solution/src/x402-facilitator.ts):
+[`solution-x402/src/x402-facilitator.ts`](../solution-x402/src/x402-facilitator.ts):
 
 ```ts
 import { Hono } from "hono";
@@ -78,7 +78,7 @@ An x402 facilitator is literally three HTTP routes. That's the whole protocol on
 
 ## How the API talks to it
 
-[`solution/src/x402-server.ts`](../solution/src/x402-server.ts):
+[`solution-x402/src/x402-server.ts`](../solution-x402/src/x402-server.ts):
 
 ```ts
 import { x402ResourceServer } from "@x402/hono";
@@ -95,7 +95,7 @@ The `resourceServer` object is what `paymentMiddleware()` uses to decide whether
 
 ## Bringing it all up in the right order
 
-Because the API's `paymentMiddleware` needs to know what the facilitator supports before it can handle requests, startup order matters ([`solution/src/index.ts`](../solution/src/index.ts)):
+Because the API's `paymentMiddleware` needs to know what the facilitator supports before it can handle requests, startup order matters ([`solution-x402/src/index.ts`](../solution-x402/src/index.ts)):
 
 ```ts
 await fundWallet(process.env.SERVER_WALLET_ADDRESS!, "server");

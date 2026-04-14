@@ -2,7 +2,7 @@
 
 Students and agents need test USDC without buying any. Surfpool's `surfnet_setTokenAccount` cheatcode mints any amount of any SPL token into any wallet — so `/faucet` is 20 lines:
 
-See [`solution/src/routes/faucet.ts`](../solution/src/routes/faucet.ts):
+See [`solution-x402/src/routes/faucet.ts`](../solution-x402/src/routes/faucet.ts):
 
 ```ts
 faucet.post("/faucet", async (c) => {

@@ -32,22 +32,22 @@ Quick tour:
 
 ## `.env`
 
-Copy [`solution/.env.example`](../solution/.env.example) to `.env`:
+Copy [`solution-x402/.env.example`](../solution-x402/.env.example) to `.env`:
 
 ```bash
-cp solution/.env.example .env
+cp solution-x402/.env.example .env
 ```
 
 You'll fill in the four wallet fields after chapter 04.
 
 ## `tsconfig.json`
 
-Copy [`solution/tsconfig.json`](../solution/tsconfig.json) verbatim — modern ESNext + bundler resolution + strict mode.
+Copy [`solution-x402/tsconfig.json`](../solution-x402/tsconfig.json) verbatim — modern ESNext + bundler resolution + strict mode.
 
 ## Project layout
 
 ```
-solution/
+solution-x402/
 ├── src/
 │   ├── index.ts              # Hono entrypoint
 │   ├── wallet.ts             # keypair helpers

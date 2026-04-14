@@ -1,6 +1,6 @@
 # 08 — Agent client
 
-Time to spend money. [`solution/agent-example/buy-event-ticket.ts`](../solution/agent-example/buy-event-ticket.ts) is a ~40-line script that plays the role of an autonomous agent: it generates a fresh wallet, tops itself up, submits an event, and buys its own ticket.
+Time to spend money. [`solution-x402/agent-example/buy-event-ticket.ts`](../solution-x402/agent-example/buy-event-ticket.ts) is a ~40-line script that plays the role of an autonomous agent: it generates a fresh wallet, tops itself up, submits an event, and buys its own ticket.
 
 ## The essential five lines
 

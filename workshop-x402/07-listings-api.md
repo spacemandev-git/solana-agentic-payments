@@ -2,7 +2,7 @@
 
 Anyone who owns a ticket can list it at any price. The listing's buy URL **is the payment link** — share `http://.../listings/<id>/buy?buyer=...` and any agent can fetch+pay it.
 
-See [`solution/src/routes/listings.ts`](../solution/src/routes/listings.ts).
+See [`solution-x402/src/routes/listings.ts`](../solution-x402/src/routes/listings.ts).
 
 ## Create (free)
 
