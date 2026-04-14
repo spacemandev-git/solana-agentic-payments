@@ -46,7 +46,7 @@ Resource servers are cheap to run because they don't hold chain credentials. The
 
 ### MPP (`@solana/mpp`)
 
-[MPP](https://github.com/solana-foundation/mpp-sdk) is the Solana Foundation's **Machine Payments Protocol** — Solana-native by design, bundled as a single SDK that does verify + settle **inline, in your server process**. There's no facilitator. Key ergonomics for Solana:
+[MPP](https://github.com/solana-foundation/mpp-sdk) is the Solana Foundation's take on Stripe / Tempo's **Machine Payments Protocol** — Solana-native by design, bundled as a single SDK that does verify + settle **inline, in your server process**. There's no facilitator. Key ergonomics for Solana:
 
 - **Fee sponsorship** — pass your server wallet as `signer` to `solana.charge(...)` and the server co-signs every client transaction as fee payer. Agent wallets hold USDC only. They never need SOL.
 - **Inline payment checks** — `mppx.charge({ amount, currency, description })(request)` is a plain function call inside your handler, which makes dynamic pricing, per-seller recipients, and per-request `externalId`s trivial (no middleware callbacks).
@@ -58,18 +58,18 @@ The trade-off: MPP is Solana-only, and your server now holds keys (to sponsor fe
 
 ### Side-by-side
 
-| | **x402** | **MPP (`@solana/mpp`)** |
-|---|---|---|
-| Architecture | Resource server + **separate facilitator** (`/verify` + `/settle`) | One server verifies and broadcasts directly |
-| Wallets | 2 (server receives USDC, facilitator pays SOL) | 1 (server does both) |
-| Agent needs SOL? | Yes — agent signs and broadcasts | **No** — server co-signs as fee payer |
-| Integration | Declarative middleware (`paymentMiddleware({ "POST /events": {accepts: ...} })`) | Inline (`const r = await mppx.charge({...})(req)`) |
-| Dynamic price / recipient | `DynamicPrice` / `DynamicPayTo` callbacks | Just arguments to each call |
-| Settlement | Client-broadcast (`exact` scheme) | Pull (server) or push (client) |
-| Marketplace splits | Manual | `splits: [...]` up to 8 |
-| Browser UX | JSON only | `html: true` → payment page |
-| Network id | CAIP-2 (`solana:5eykt4Us...`) | `"mainnet-beta"` \| `"devnet"` \| `"localnet"` |
-| Ecosystem | Chain-agnostic (EVM + SVM) | Solana-first |
+|                           | **x402**                                                                         | **MPP (`@solana/mpp`)**                            |
+| ------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------- |
+| Architecture              | Resource server + **separate facilitator** (`/verify` + `/settle`)               | One server verifies and broadcasts directly        |
+| Wallets                   | 2 (server receives USDC, facilitator pays SOL)                                   | 1 (server does both)                               |
+| Agent needs SOL?          | Yes — agent signs and broadcasts                                                 | **No** — server co-signs as fee payer              |
+| Integration               | Declarative middleware (`paymentMiddleware({ "POST /events": {accepts: ...} })`) | Inline (`const r = await mppx.charge({...})(req)`) |
+| Dynamic price / recipient | `DynamicPrice` / `DynamicPayTo` callbacks                                        | Just arguments to each call                        |
+| Settlement                | Client-broadcast (`exact` scheme)                                                | Pull (server) or push (client)                     |
+| Marketplace splits        | Manual                                                                           | `splits: [...]` up to 8                            |
+| Browser UX                | JSON only                                                                        | `html: true` → payment page                        |
+| Network id                | CAIP-2 (`solana:5eykt4Us...`)                                                    | `"mainnet-beta"` \| `"devnet"` \| `"localnet"`     |
+| Ecosystem                 | Chain-agnostic (EVM + SVM)                                                       | Solana-first                                       |
 
 **Pick x402 when:** you want a protocol portable across chains, you like separating settlement from resource provision, or you're building a network of metered APIs that share a facilitator.
 
